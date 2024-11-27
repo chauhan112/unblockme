@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .game-container {
+        width: 360px;
+        height: 360px;
+        background: #f0d9b5;
+        position: relative;
+        border: 2px solid #8b4513;
+        margin: 20px auto;
+      }
+
+      .block {
+        position: absolute;
+        background: #8b4513;
+        border: 2px solid #603000;
+        cursor: grab;
+        transition: all 0.2s ease;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+        color: white;
+      }
+
+      .main-block {
+        background: #cd5c5c;
+        z-index: 2;
+      }
+
+      .grid-cell {
+        width: 60px;
+        height: 60px;
+        border: 1px solid rgba(139, 69, 19, 0.2);
+        position: absolute;
+      }
+
+      .exit {
+        position: absolute;
+        background: #90ee90;
+        border: 2px solid #228b22;
+      }
+
+      .win-message {
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+        z-index: 3;
+        font-size: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="game-container" id="gameContainer">
+      <!-- Grid cells will be added by JavaScript -->
+      <div class="win-message" id="winMessage">Congratulations! You won!</div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/gh/chauhan112/JSlib@f793186/timeline/t2024/unblock.js"></script>
+    <script>
+      const GRID_SIZE = 60;
+      const gameContainer = document.getElementById("gameContainer");
+      const winMessage = document.getElementById("winMessage");
+      let selectedBlock = null;
+      let offset = { x: 0, y: 0 };
+      let allPositions = new Set();
+      let gridNr = 6;
+      makeGrid(gridNr, gridNr, gameContainer);
+      let blocks = [
+        { x: 0, y: 2, width: 2, height: 1, isMain: true },
+        { x: 0, y: 0, width: 1, height: 2 },
+        { x: 2, y: 0, width: 1, height: 3 },
+        { x: 4, y: 2, width: 1, height: 2 },
+        { x: 0, y: 4, width: 3, height: 1 },
+        // { x: 5, y: 0, width: 1, height: 1 },
+      ];
+      let blocksWithState = [];
+      let doorLoc = 2;
+      makeBlocks(blocks, doorLoc, gameContainer);
+    </script>
+  </body>
+</html>
